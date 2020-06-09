@@ -98,7 +98,7 @@ function TableWrapper(props) {
                 event.preventDefault();
                 event.stopPropagation();
 
-                action.onClick(event, row);
+                action.onClick(row);
               }}
             />
           );
