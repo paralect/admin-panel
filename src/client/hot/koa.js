@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const koaWebpack = require('koa-webpack');
 
-const webpackConfig = require('../client/webpack.dev.config');
+const webpackConfig = require('../webpack.dev.config');
 
 
 const hmr = () => {

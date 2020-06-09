@@ -19,7 +19,7 @@
     "prestart": "npm run build",
     "start": "NODE_ENV=production node src/server/app.js",
     "development": "run-p development:**",
-    "development:client": "NODE_ENV=development nodemon --watch src/client/webpack.dev.config.js src/hot/app.js",
+    "development:client": "NODE_ENV=development nodemon --watch src/client/webpack.dev.config.js src/client/hot/app.js",
     "development:server": "NODE_ENV=development nodemon --watch src/server src/server/app.js"
   },
   "dependencies": {
