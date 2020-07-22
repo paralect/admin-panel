@@ -3,10 +3,10 @@ const _ = require('lodash');
 const db = require('db');
 const constants = require('app.constants');
 
-const schema = require('./user.schema');
+const validateSchema = require('./user.schema');
 
 
-const service = db.createService(constants.DATABASE_DOCUMENTS.USERS, schema);
+const service = db.createService(constants.DATABASE_DOCUMENTS.USERS, { validateSchema });
 
 const privateFields = [
   'passwordHash',

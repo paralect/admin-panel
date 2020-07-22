@@ -1,9 +1,26 @@
+const Joi = require('@hapi/joi');
+
 const userService = require('resources/user/user.service');
-const regexp = require('helpers/regexp');
+const regexp = require('helpers/regexp.helper');
 const validate = require('middlewares/validate');
 
-const validator = require('./validator');
 
+const schema = Joi.object({
+  searchText: Joi.string()
+    .allow('')
+    .default(''),
+  sortBy: Joi.array()
+    .items(Joi.string())
+    .default(['createdOn']),
+  sortDirection: Joi.number()
+    .default(-1),
+  page: Joi.number()
+    .min(1)
+    .default(1),
+  pageSize: Joi.number()
+    .min(0)
+    .default(10),
+});
 
 const handler = async (ctx) => {
   const {
@@ -12,7 +29,7 @@ const handler = async (ctx) => {
     pageSize,
     sortBy,
     sortDirection,
-  } = ctx.validatedRequest.value;
+  } = ctx.validatedData;
 
   const query = {};
 
@@ -25,17 +42,14 @@ const handler = async (ctx) => {
     ];
   }
 
-  const options = { page, pageSize };
+  const options = { page, perPage: pageSize };
 
   options.sort = sortBy.reduce((acc, field) => {
     acc[field] = sortDirection;
     return acc;
   }, {});
 
-  const [{ results: users }, totalAmount] = await Promise.all([
-    userService.find(query, options),
-    userService.count(query),
-  ]);
+  const { results: users, count: totalAmount } = await userService.find(query, options);
 
   ctx.body = {
     results: users.map(userService.getPublic),
@@ -44,5 +58,5 @@ const handler = async (ctx) => {
 };
 
 module.exports.register = (router) => {
-  router.get('/', validate(validator), handler);
+  router.get('/', validate(schema), handler);
 };
