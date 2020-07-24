@@ -23,12 +23,13 @@
     "development:server": "NODE_ENV=development nodemon --watch src/server src/server/app.js"
   },
   "dependencies": {
+    "@hapi/joi": "17.1.1",
     "@carbon/icons-react": "10.11.0",
     "@hot-loader/react-dom": "16.8.6",
     "@koa/cors": "3.0.0",
     "@koa/router": "8.0.8",
     "@paralect/common-logger": "0.1.10",
-    "@paralect/node-mongo": "2.0.0-beta.1",
+    "@paralect/node-mongo": "2.0.0-beta.4",
     "app-module-path": "2.2.0",
     "axios": "0.18.1",
     "babel-plugin-lodash": "3.3.4",
@@ -43,7 +44,6 @@
     "history": "4.9.0",
     "html-webpack-plugin": "3.2.0",
     "incstr": "1.2.3",
-    "joi": "14.3.1",
     "koa": "2.7.0",
     "koa-bodyparser": "4.3.0",
     "koa-helmet": "5.2.0",
